@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[连接互联网]]></title>
+    <url>%2F2019%2F02%2F25%2Fdaiding%2F</url>
+    <content type="text"><![CDATA[前言 为了连接真正的互联网 一、购买VPS推荐Vultr 套餐$3.5/mo 或 $5/mo 即可 VPS系统要求： CentOS 6+ ,Debian 7+ ,Ubuntu 12+ 记下VPS IP ,username ,password 备用 此步骤请确保ip能够ping通，否则重选服务器机房 二、远程连接VPS利用SSH连接VPS，Windows系统推荐xshell 点击 “文件” → “新建” → “连接”，输入 “名称” 和 “主机” （即VPS ip），端口号默认22即可 点击 “用户身份验证”，复制粘贴用户名和密码。连接 连接 VPS，接受并保存密匙 出现 root@vultr:~# 即连接成功 此步确保能够连接服务器，否则重选服务器机房 三、在VPS上搭建shadowsocksR服务端确保远程连接VPS后，依次在xshell执行一下三条命令 1wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 1chmod +x shadowsocks-all.sh 1./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log 之后按提示进行操作，直至提示 enjoy it! 字样即安装成功。 四、使用 客户端下载 打开客户端，填入相关参数 开启代理 安装并启用Google BBR加速 使用root用户登录，运行以下命令： 123wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.shchmod +x bbr.sh./bbr.sh 安装完成后，脚本会提示需要重启 VPS，输入 y 并回车后重启。 重启完成后，进入 VPS，验证一下是否成功安装最新内核并开启 TCP BBR，输入以下命令： 1uname -r 查看内核版本，显示为最新版就表示 OK 了(一般为4.9或以上) 1sysctl net.ipv4.tcp_available_congestion_control 返回值一般为：net.ipv4.tcp_available_congestion_control = bbr cubic reno或者为：net.ipv4.tcp_available_congestion_control = reno cubic bbr 1sysctl net.ipv4.tcp_congestion_control 返回值一般为：net.ipv4.tcp_congestion_control = bbr 1sysctl net.core.default_qdisc 返回值一般为：net.core.default_qdisc = fq 1lsmod | grep bbr 返回值有 tcp_bbr 模块即说明 bbr 已启动。注意：并不是所有的 VPS 都会有此返回值，若没有也属正常。 参考链接https://segmentfault.com/a/1190000018145112#articleHeader9https://teddysun.com/486.htmlhttps://teddysun.com/489.html 来自CW的一段话Shadowsocks 没有办法离开去中心化的服务器。要么自己花钱买 VPS，要么用有人分享的账号，要么用有人提供的付费服务，他们各有所长，适合不同的人。所以作为开发者，保持中立，不偏袒其中任何一方，顺其自然发展下去是最好的吧。很多人要么一窝蜂的支持，要么一窝蜂的反对，还要把它给封禁掉，大概这种心理鲁迅先生也曾批判过。如果你们真的那么讨厌商业，那你们应该首先把你们的苹果设备给摔了，因为它就是商业社会巅峰造极的产物。我反对不喜欢一个东西就要拿出简单粗暴的制裁手段，正是这种习性成就了 GFW。维护这个项目到现在大概总共回复过几千个问题，开始慢慢想清楚了一件事，为什么会存在 GFW。从这些提问可以看出，大部分人的自理能力都很差，只是等着别人帮他。特别是那些从 App Store 下载了 App 用着公共服务器的人，经常发来一封只有四个字的邮件：“不能用了？” 我觉得这是一个社会常识，花一分钟写的问题，不能期待一个毫无交情的陌生人花一个小时耐心地问你版本和操作步骤，模拟出你的环境来帮你分析解决。Windows 版加上 GFWList 功能以来，我反复呼吁给 GFWList 提交规则，但是一个月过去了竟然一个提交都没有。如果没有人做一点什么，它自己是不会更新的啊，没有人会义务地帮你打理这些。我觉得，政府无限的权力，都是大部分人自己放弃的。假货坑爹，让政府审核。孩子管不好，让政府关网吧。房价太高，让政府去限购。我们的文化实在太独特，创造出了家长式威权政府，GFW 正是在这种背景下产生的，一个社会矛盾的终极调和器，最终生活不能自理的你每天做的每一件事情都要给政府审查一遍，以免伤害到其他同样生活不能自理的人。这是一个零和游戏，越和这样的用户打交道，越对未来持悲观态度，觉得 GFW 可能永远也不会消失，而墙内的这个局域网看起来还似乎生机勃勃的自成一体，真是让人绝望。]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>tool</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F02%2F13%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
   </entry>
   <entry>
-    <title><![CDATA[All Categories]]></title>
-    <url>%2Fcategories%2Findex.html</url>
-    <content type="text"></content>
+    <title><![CDATA[关于我]]></title>
+    <url>%2Fabout%2Findex.html</url>
+    <content type="text"><![CDATA[一个车辆工程本科生 目前对代码有点兴趣 可能真的只是目前吧 喜欢滑板、喜欢游戏（steam ID：Azhe-Lin）、喜欢模型 正式发布第一篇博客。 by-2019/02/26 建立博客，just for fun. by-2019/02/13]]></content>
   </entry>
   <entry>
     <title><![CDATA[All Tags]]></title>
     <url>%2Ftags%2Findex.html</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[All Categories]]></title>
+    <url>%2Fcategories%2Findex.html</url>
     <content type="text"></content>
   </entry>
 </search>
