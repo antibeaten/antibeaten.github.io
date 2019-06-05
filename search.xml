@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Win 10+Ubuntu 18.04 LTS 双系统安装[Legacy启动模式]]]></title>
+    <url>%2F2019%2F06%2F04%2F%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[前言毕设论文查重刚结束，闲暇之余心血来潮想玩玩之前一直好奇的Ubuntu系统，于是就有了这次安装双系统的经历，安装之前因为害怕出问题查阅了许多教程也迟迟没有动手。但最后安装过程却意外的很顺利。 安装环境1 确认启动模式1win+r --&gt; msinfo32 图中BIOS模式显示传统说明本机启动模式为Legacy 2 前置系统安装环境本机硬盘由一块装有Win 10的SSD和一块HDD组成，且两块硬盘均为MBR分区格式。 安装前准备工作 确认Win 10“快速启动功能”关闭 确认BOIS Security Boot 关闭 （本机貌似找不到此功能） 确保U盘启动优先级高于硬盘启动 下载相关软件 Ubuntu 18.04 LTS安装镜像下载地址：https://www.ubuntu.com/download/desktop USB 启动盘软件Rufus：https://rufus.ie/ 系统引导软件EasyBCD：https://neosmart.net/EasyBCD/ 安装步骤1. 硬盘压缩分区本文计划将Ubuntu的/boot分区置于与Win 10 的SSD中，其他如/ 、/swap 、/home置于HDD中。win + X –&gt;磁盘管理，在SSD中利用卷压缩分出500MB以上的空间，在HDD中同样利用卷压缩分出80GB左右空间。 2. 制作启动盘2.1 使用Rufus制作启动盘，按下图序号进行操作，在【设备】中选择U盘，点击【按钮】选择下载好的Ubuntu镜像，【分区类型】这里根据启动方式选择MBR，【目标系统类型】选择BIOS或UEFI，【格式化选项】按默认值即可。 2.2 弹出如下所示对话框，点击【是】即可。 2.3选择【以ISO镜像 模式写入(推荐)】模式。 2.4提示会清除u盘上的数据，点击【是】即可。 3. 安装步骤主体3.1 物理断网3.2 插入U盘3.3 重启系统，从U盘进入安装Ubuntu系统3.4 在【欢迎】页面，选择【简体中文】，点击【安装Ubuntu】3.5 【键盘布局】选择【汉语】即可3.6 【无线】页面选择【我现在不想链接wi-fi无线网络】，先不联网3.7 在【更新和其他软件】选择【正常安装】选项即可3.8 【安装类型】页面选择【其他选项】，这样便可以自己创建调整分区3.9 严格按照如下顺序创建分区 在SSD空闲空间中创建，【大小】512MB，【分区类型】选择逻辑分区，【新分区的位置】选择空间起始位置，【用于】选择Ext4日志文件系统，【挂载点】选择/boot 在HDD上空闲空间中创建，【大小】物理内存1~2倍，【分区类型】选择逻辑分区，【新分区的位置】选择空间起始位置，【用于】选择交换空间 在HDD上空闲空间中创建，【大小】至少30GB，【分区类型】选择逻辑分区，【新分区的位置】选择空间起始位置，【用于】选择Ext4日志文件系统，【挂载点】选择/ 在HDD上空闲空间中创建,【大小】剩余的空间，【分区类型】选择逻辑分区，【新分区的位置】选择空间起始位置，【用于】选择Ext4日志文件系统，【挂载点】选择/home 3.10 安装启动引导的设备路径为/boot所在分区(例如本次是/dev/sdb5)这样才能利用Win 10 引导Ubuntu3.11 点击现在安装，提示【将改动写入磁盘吗?】，点击【继续】按钮即可3.12 一路按照提示往下进行，安装完成后，点击【现在重启】按钮，黑屏后记得拔出U盘，重启系统然后会进入之前已安装的windows 10 4. 利用EasyBCD（2.4）创建引导 添加新条目–&gt; Linux/BSD –&gt; 【类型】选择GRUB（Legacy） –&gt;【名称】自定义 –&gt; 【驱动器】选择/boot所在分区–&gt; 点击右下角绿色加号 编辑引导菜单 –&gt; Use Metro Bootloader打勾 –&gt; 设置倒计时 –&gt; 保存 5. 重启测试是否两个系统都能正常启动若均正常则安装并引导成功 遇到的问题 Ubuntu在进行某些更新后，重启时出现光标在左上角闪动无法进入系统，此时只需利用EasyBCD删除旧的引导条目重新建立条目即可 安装完后，由于两个系统对于时间的配置方法不一样（Win 10 将硬件时间当成本地时间，Ubuntu在硬件时间的基础上加上时区修正），Win 10会比Ubuntu慢8个小时。解决方法如下： 123sudo apt install ntpdate#安装ntpdatesudo ntpdate time.windows.com#校准时间sudo hwclock --localtime --systohc#将硬件时间设置为本地时间 参考文章 https://blog.csdn.net/chaixingsi/article/details/86722410#02__8https://blog.csdn.net/qq_24624539/article/details/81775635]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>Win 10</tag>
+        <tag>双系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[连接互联网]]></title>
     <url>%2F2019%2F02%2F25%2Fdaiding%2F</url>
     <content type="text"><![CDATA[前言 为了连接真正的互联网 一、购买VPS推荐Vultr 套餐$3.5/mo 或 $5/mo 即可 VPS系统要求： CentOS 6+ ,Debian 7+ ,Ubuntu 12+ 记下VPS IP ,username ,password 备用 此步骤请确保ip能够ping通，否则重选服务器机房 二、远程连接VPS利用SSH连接VPS，Windows系统推荐xshell 点击 “文件” → “新建” → “连接”，输入 “名称” 和 “主机” （即VPS ip），端口号默认22即可 点击 “用户身份验证”，复制粘贴用户名和密码。连接 连接 VPS，接受并保存密匙 出现 root@vultr:~# 即连接成功 此步确保能够连接服务器，否则重选服务器机房 三、在VPS上搭建shadowsocksR服务端确保远程连接VPS后，依次在xshell执行一下三条命令 1wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 1chmod +x shadowsocks-all.sh 1./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log 之后按提示进行操作，直至提示 enjoy it! 字样即安装成功。 四、使用 客户端下载 打开客户端，填入相关参数 开启代理 启动脚本启动脚本后面的参数含义，从左至右依次为：启动，停止，重启，查看状态。 ShadowsocksR 版：/etc/init.d/shadowsocks-r start | stop | restart | status 安装并启用Google BBR加速 使用root用户登录，运行以下命令： 123wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.shchmod +x bbr.sh./bbr.sh 安装完成后，脚本会提示需要重启 VPS，输入 y 并回车后重启。 重启完成后，进入 VPS，验证一下是否成功安装最新内核并开启 TCP BBR，输入以下命令： 1uname -r 查看内核版本，显示为最新版就表示 OK 了(一般为4.9或以上) 1sysctl net.ipv4.tcp_available_congestion_control 返回值一般为：net.ipv4.tcp_available_congestion_control = bbr cubic reno或者为：net.ipv4.tcp_available_congestion_control = reno cubic bbr 1sysctl net.ipv4.tcp_congestion_control 返回值一般为：net.ipv4.tcp_congestion_control = bbr 1sysctl net.core.default_qdisc 返回值一般为：net.core.default_qdisc = fq 1lsmod | grep bbr 返回值有 tcp_bbr 模块即说明 bbr 已启动。注意：并不是所有的 VPS 都会有此返回值，若没有也属正常。 参考链接https://segmentfault.com/a/1190000018145112#articleHeader9https://teddysun.com/486.htmlhttps://teddysun.com/489.html 来自CW的一段话Shadowsocks 没有办法离开去中心化的服务器。要么自己花钱买 VPS，要么用有人分享的账号，要么用有人提供的付费服务，他们各有所长，适合不同的人。所以作为开发者，保持中立，不偏袒其中任何一方，顺其自然发展下去是最好的吧。很多人要么一窝蜂的支持，要么一窝蜂的反对，还要把它给封禁掉，大概这种心理鲁迅先生也曾批判过。如果你们真的那么讨厌商业，那你们应该首先把你们的苹果设备给摔了，因为它就是商业社会巅峰造极的产物。我反对不喜欢一个东西就要拿出简单粗暴的制裁手段，正是这种习性成就了 GFW。维护这个项目到现在大概总共回复过几千个问题，开始慢慢想清楚了一件事，为什么会存在 GFW。从这些提问可以看出，大部分人的自理能力都很差，只是等着别人帮他。特别是那些从 App Store 下载了 App 用着公共服务器的人，经常发来一封只有四个字的邮件：“不能用了？” 我觉得这是一个社会常识，花一分钟写的问题，不能期待一个毫无交情的陌生人花一个小时耐心地问你版本和操作步骤，模拟出你的环境来帮你分析解决。Windows 版加上 GFWList 功能以来，我反复呼吁给 GFWList 提交规则，但是一个月过去了竟然一个提交都没有。如果没有人做一点什么，它自己是不会更新的啊，没有人会义务地帮你打理这些。我觉得，政府无限的权力，都是大部分人自己放弃的。假货坑爹，让政府审核。孩子管不好，让政府关网吧。房价太高，让政府去限购。我们的文化实在太独特，创造出了家长式威权政府，GFW 正是在这种背景下产生的，一个社会矛盾的终极调和器，最终生活不能自理的你每天做的每一件事情都要给政府审查一遍，以免伤害到其他同样生活不能自理的人。这是一个零和游戏，越和这样的用户打交道，越对未来持悲观态度，觉得 GFW 可能永远也不会消失，而墙内的这个局域网看起来还似乎生机勃勃的自成一体，真是让人绝望。]]></content>
@@ -25,16 +38,16 @@
   <entry>
     <title><![CDATA[关于我]]></title>
     <url>%2Fabout%2Findex.html</url>
-    <content type="text"><![CDATA[一个车辆工程本科生 目前对代码有点兴趣 可能真的只是目前吧 喜欢滑板、喜欢游戏（steam ID：Azhe-Lin）、喜欢模型 正式发布第一篇博客。 by-2019/02/26 建立博客，just for fun. by-2019/02/13]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[All Tags]]></title>
-    <url>%2Ftags%2Findex.html</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[一个车辆工程本科生 目前对代码有点兴趣 可能真的只是目前吧 喜欢滑板、喜欢游戏（steam ID：Azhe-Lin）、喜欢模型 发布第二篇博客。by-2019/06/05 正式发布第一篇博客。 by-2019/02/26 建立博客，just for fun. by-2019/02/13]]></content>
   </entry>
   <entry>
     <title><![CDATA[All Categories]]></title>
     <url>%2Fcategories%2Findex.html</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[All Tags]]></title>
+    <url>%2Ftags%2Findex.html</url>
     <content type="text"></content>
   </entry>
 </search>
